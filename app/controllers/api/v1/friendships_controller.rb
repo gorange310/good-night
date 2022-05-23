@@ -12,4 +12,13 @@ class Api::V1::FriendshipsController < ApplicationController
     end
   end
 
+  def destroy
+    friend = User.find_by(id: params[:id])
+    friendship = @user.friendships.find_by(friend_id: friend.id)
+    if friendship&.destroy
+      render json: { message: "#{friend.name} was successfully removed" }
+    else
+      render json: { message: 'Delete failed' }, status: :not_found
+    end
+  end
 end

@@ -34,4 +34,37 @@ RSpec.describe "Api::V1::Friendships", type: :request do
       end
     end
   end
+
+  describe 'DELETE /api/v1/friendships' do
+    subject(:delete_friendships) { delete "/api/v1/friendships/#{friend.id}", params: { user_name: user.name } }
+    context "there's valid friend id" do
+      let(:user) { users(:user2) }
+      let(:friend) { users(:user1) }
+      it 'destroys the requested friendships' do
+        expect(user.friends.size).to eq(1)
+
+        expect { delete_friendships }.to change(Friendship, :count).by(-1)
+        result = JSON.parse(response.body)
+
+        expect(response).to have_http_status(:success)
+        expect(response.status).to eq(200)
+        expect(result['data']).to be_nil
+      end
+    end
+
+    context "there's invalid friend id" do
+      let(:user) { users(:user2) }
+      let(:friend) { users(:user2) }
+      it 'destroys the requested friendships' do
+        expect(user.friends.size).to eq(1)
+
+        expect { delete_friendships }.to change(Friendship, :count).by(0)
+        result = JSON.parse(response.body)
+
+        expect(response).to have_http_status(:not_found)
+        expect(response.status).to eq(404)
+        expect(result['data']).to be_nil
+      end
+    end
+  end
 end
