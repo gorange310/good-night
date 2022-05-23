@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :sleeps, only: %w[index create]
+      resources :friendships, only: %w[create destroy]
     end
   end
 end
