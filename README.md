@@ -1,24 +1,25 @@
-# README
+## Requirements
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Rails
+- Ruby
 
-Things you may want to cover:
+### Start dev server
 
-* Ruby version
+---
 
-* System dependencies
+```
+rails s
+```
 
-* Configuration
+### Test
 
-* Database creation
+- `bundle exec rake spec`
 
-* Database initialization
 
-* How to run the test suite
+“good night” application to let users track when do they go to bed and when do they wake up.
 
-* Services (job queues, cache servers, search engines, etc.)
+some restful APIS to achieve the following:
 
-* Deployment instructions
-
-* ...
+1. Clock In operation, and return all clocked-in times, ordered by created time.
+2. Users can follow and unfollow other users.
+3. See the sleep records over the past week for their friends, ordered by the length of their sleep.
