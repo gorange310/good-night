@@ -14,4 +14,13 @@ class Api::V1::SleepsController < ApplicationController
     }
   end
 
+  def create
+    @sleep = UserClockInService.new(@user).call
+
+    if @sleep.active?
+      render json: { message: 'Start recoding sleep', data: @sleep }
+    else
+      render json: { message: "Slep from #{@sleep.created_at} for #{@sleep.seconds} seconds", data: @sleep }
+    end
+  end
 end
