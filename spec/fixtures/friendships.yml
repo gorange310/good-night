@@ -1,3 +1,15 @@
 friendship1:
   user: user2
   friend: user1
+
+friendship2:
+  user: user3
+  friend: user1
+
+friendship3:
+  user: user3
+  friend: user2
+
+friendship4:
+  user: user3
+  friend: user4
